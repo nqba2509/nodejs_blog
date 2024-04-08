@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-//import newsController
+//import siteController
 const siteController = require("../app/controllers/SiteControllers");
 
-//newsController.index
+//siteController.index
 router.get("/search", siteController.search);
 router.get("/", siteController.home);
 
