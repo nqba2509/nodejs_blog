@@ -6,7 +6,7 @@ class SiteController {
       if (!err) {
         res.json(courses);
       } else {
-        res.status(400).json({ error: "ERROR!!!" });
+        res.status(400).json({ error : "ERROR!!!" });
       }
     });
 
