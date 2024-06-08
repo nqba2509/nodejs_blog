@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const engine = require("express-handlebars").engine;
 const route = require("./routes");
@@ -34,3 +35,7 @@ route(app);
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
+
+//Body-parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
