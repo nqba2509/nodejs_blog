@@ -17,16 +17,17 @@ class CourseController {
     res.render("courses/create");
   }
   // [POST] /courses/store
-  store(req, res, next) {
-    const formData = req.body;
-    formData.image = `https://img.youtube.com/vi/${req.body.videoId}/mqdefault.jpg`;
-    const course = new Course(formData);
-    course
-      .save()
-      .then(() => res.redirect("/"))
-      .catch((error) => {});
-    res.send("COURSER SAVE!");
-  }
+  store = async (req, res, next) => {
+    try {
+      const formData = { ...req.body };
+      formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+      const course = new Course(formData);
+      await course.save();
+      res.status(201).send(course); // Trả về phản hồi thành công
+    } catch (err) {
+      next(err); // Gọi middleware xử lý lỗi
+    }
+  };
 }
 
 module.exports = new CourseController();

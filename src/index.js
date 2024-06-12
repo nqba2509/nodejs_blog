@@ -15,6 +15,11 @@ db.connect();
 //Static file
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.urlencoded({
+  extended: true
+}));
+app.use(express.json());
+
 //HTTP logger
 app.use(morgan("combined"));
 
@@ -37,5 +42,5 @@ app.listen(port, () => {
 });
 
 //Body-parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
