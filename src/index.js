@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const engine = require("express-handlebars").engine;
+const methodOverride = require('method-override')
 const route = require("./routes");
 
 const path = require("path");
@@ -15,9 +16,11 @@ db.connect();
 //Static file
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.json());
 
 //HTTP logger
@@ -28,10 +31,16 @@ app.engine(
   "hbs",
   engine({
     extname: "hbs",
+    helpers: {
+      sum: (a, b) => a + b,
+    },
   })
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
+
+//Override Method
+app.use(methodOverride('_method'))
 
 //Routes init
 route(app);
