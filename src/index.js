@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const engine = require("express-handlebars").engine;
 const methodOverride = require('method-override')
